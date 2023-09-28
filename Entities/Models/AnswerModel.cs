@@ -7,4 +7,5 @@ public class AnswerModel : Commentable
 {
     public QuestionModel Question { get; set; }
     public Visibility Visibility { get; set; }
+    public List<ReactionModel> Reactions { get; set; }
 }

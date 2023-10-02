@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: (
+            <>
+                <Home/> <Footer/>
+            </>
+        ),
     },
 ]);
 

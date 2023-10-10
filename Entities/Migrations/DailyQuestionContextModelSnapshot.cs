@@ -39,7 +39,7 @@ namespace Entities.Migrations
 
                     b.HasIndex("ReceiverUserId");
 
-                    b.ToTable("FriendsModels");
+                    b.ToTable("FriendsModel");
                 });
 
             modelBuilder.Entity("Entities.Models.ParentClasses.Commentable", b =>
@@ -88,7 +88,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionModels");
+                    b.ToTable("QuestionModel");
                 });
 
             modelBuilder.Entity("Entities.Models.ReactionModel", b =>
@@ -108,7 +108,7 @@ namespace Entities.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ReactionModels");
+                    b.ToTable("ReactionModel");
                 });
 
             modelBuilder.Entity("Entities.Models.UserModel", b =>
@@ -118,6 +118,10 @@ namespace Entities.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -134,7 +138,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserModels");
+                    b.ToTable("UserModel");
                 });
 
             modelBuilder.Entity("Entities.Models.AnswerModel", b =>

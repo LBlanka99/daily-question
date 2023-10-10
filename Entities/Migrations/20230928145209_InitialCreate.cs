@@ -12,7 +12,7 @@ namespace Entities.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "QuestionModels",
+                name: "QuestionModel",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -25,7 +25,7 @@ namespace Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserModels",
+                name: "UserModel",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -64,19 +64,19 @@ namespace Entities.Migrations
                     table.ForeignKey(
                         name: "FK_Commentable_QuestionModels_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "QuestionModels",
+                        principalTable: "QuestionModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Commentable_UserModels_UserId",
                         column: x => x.UserId,
-                        principalTable: "UserModels",
+                        principalTable: "UserModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FriendsModels",
+                name: "FriendsModel",
                 columns: table => new
                 {
                     SenderUserId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -89,19 +89,19 @@ namespace Entities.Migrations
                     table.ForeignKey(
                         name: "FK_FriendsModels_UserModels_ReceiverUserId",
                         column: x => x.ReceiverUserId,
-                        principalTable: "UserModels",
+                        principalTable: "UserModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FriendsModels_UserModels_SenderUserId",
                         column: x => x.SenderUserId,
-                        principalTable: "UserModels",
+                        principalTable: "UserModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReactionModels",
+                name: "ReactionModel",
                 columns: table => new
                 {
                     AnswerId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -120,7 +120,7 @@ namespace Entities.Migrations
                     table.ForeignKey(
                         name: "FK_ReactionModels_UserModels_UserId",
                         column: x => x.UserId,
-                        principalTable: "UserModels",
+                        principalTable: "UserModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -142,12 +142,12 @@ namespace Entities.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_FriendsModels_ReceiverUserId",
-                table: "FriendsModels",
+                table: "FriendsModel",
                 column: "ReceiverUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReactionModels_UserId",
-                table: "ReactionModels",
+                table: "ReactionModel",
                 column: "UserId");
         }
 
@@ -155,19 +155,19 @@ namespace Entities.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FriendsModels");
+                name: "FriendsModel");
 
             migrationBuilder.DropTable(
-                name: "ReactionModels");
+                name: "ReactionModel");
 
             migrationBuilder.DropTable(
                 name: "Commentable");
 
             migrationBuilder.DropTable(
-                name: "QuestionModels");
+                name: "QuestionModel");
 
             migrationBuilder.DropTable(
-                name: "UserModels");
+                name: "UserModel");
         }
     }
 }

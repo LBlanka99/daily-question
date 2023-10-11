@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import {Console} from "inspector";
 
 const SignUp = () => {
-    const [data, setData]: any = useState(null);
+    const [error, setError]: any = useState(null);
 
     const navigate = useNavigate();
 
     async function sendRegisterInfo(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setError(null);
         // verify data
         const form = new FormData(e.target as HTMLFormElement);
         const entries : [string, FormDataEntryValue][] = [...form.entries()];
@@ -22,7 +23,7 @@ const SignUp = () => {
 
 
         if (user.password !== user.passwordAgain) {
-            setData("password error");
+            setError("The two passwords don't match!");
             return;
         }
 
@@ -34,8 +35,6 @@ const SignUp = () => {
             Email: user.email,
             Password: user.password,            
         });
-        
-        console.log(body);
 
         const init: RequestInit = {
             method: "POST",
@@ -44,6 +43,14 @@ const SignUp = () => {
         };
 
         const response = await fetch(apiAddress, init);
+        if (response.ok) {
+            navigate("/first-login");
+        } else {
+            const text = await response.text();
+            setError(text);
+        }
+
+
 
     }
 
@@ -51,6 +58,9 @@ const SignUp = () => {
     <div className="signup-container">
         <form className="signup-form" onSubmit={sendRegisterInfo}>
             <h2>Sign Up</h2>
+            {error &&
+                <span className="error">{error}</span>
+            }
             <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input
@@ -91,11 +101,6 @@ const SignUp = () => {
                     required
                 />
             </div>
-            {data === "password error" ? (
-                <span className="error">The two passwords don't match!</span>
-            ) : (
-                <></>
-            )}
             <button type="submit">Sign Up</button>
         </form>
     </div>

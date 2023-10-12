@@ -19,4 +19,5 @@ public class UserModel
     [DefaultValue(0)]
     public int Streak { get; set; }
     public string? ProfilePicture { get; set; }
+    public List<string> Roles { get; set; } = new List<string>();
 }

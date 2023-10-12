@@ -10,6 +10,7 @@ namespace Services;
 
 public class UserService : DailyQuestionService
 {
+    private IPasswordHasher<UserModel> _hasher = new PasswordHasher<UserModel>();
     public UserService(DailyQuestionContext context) : base(context)
     {
     }
@@ -25,7 +26,7 @@ public class UserService : DailyQuestionService
         UserModel? foundUser = await GetUserByEmail(user.Email);
         if (foundUser != null)
         {
-            throw new EmailAlreadyInUseException("This email address already in taken!");
+            throw new EmailAlreadyInUseException("This email address is already in taken!");
         }
 
         var userToAdd = new UserModel
@@ -34,13 +35,25 @@ public class UserService : DailyQuestionService
             Email = user.Email,
             Password = user.Password
         };
-
-        IPasswordHasher<UserModel> hasher = new PasswordHasher<UserModel>();
-        var hashedPassword = hasher.HashPassword(userToAdd, userToAdd.Password);
+        
+        var hashedPassword = _hasher.HashPassword(userToAdd, userToAdd.Password);
         userToAdd.Password = hashedPassword;
 
         _context.UserModel.Add(userToAdd);
         await _context.SaveChangesAsync();
         return userToAdd;
+    }
+
+    public async Task<UserModel?> LogInUser(LogInDto user)
+    {
+        UserModel? foundUser = await GetUserByEmail(user.Email);
+        if (foundUser == null)
+        {
+            return null;
+        }
+
+        var result = _hasher.VerifyHashedPassword(foundUser, foundUser.Password, user.Password);
+        
+        return result != PasswordVerificationResult.Success ? null : foundUser;
     }
 }

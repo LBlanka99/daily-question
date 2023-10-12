@@ -32,7 +32,7 @@ namespace Entities.Migrations
                     UserName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Streak = table.Column<int>(type: "integer", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "text", nullable: false)
+                    ProfilePicture = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

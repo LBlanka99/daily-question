@@ -5,6 +5,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
+import LoginForm from "./components/LoginForm";
+import FirstLogin from "./pages/FirstLogin";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,22 @@ const router = createBrowserRouter([
             </>
         ),
     },
+    {
+        path: "/log-in",
+        element: (
+            <>
+                <LoginForm/> <Footer/>
+            </>
+        )
+    },
+    {
+        path: "/first-login",
+        element: (
+            <>
+                <FirstLogin/> <LoginForm/> <Footer/>
+            </>
+        )
+    }
 ]);
 
 const root = ReactDOM.createRoot(

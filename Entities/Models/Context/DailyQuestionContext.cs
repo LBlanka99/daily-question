@@ -9,12 +9,12 @@ public class DailyQuestionContext : DbContext
         
     }
     
-    public DbSet<AnswerModel> AnswerModels { get; set; }
-    public DbSet<CommentModel> CommentModels { get; set; }
-    public DbSet<FriendsModel> FriendsModels { get; set; }
-    public DbSet<QuestionModel> QuestionModels { get; set; }
-    public DbSet<ReactionModel> ReactionModels { get; set; }
-    public DbSet<UserModel> UserModels { get; set; }
+    public DbSet<AnswerModel> AnswerModel { get; set; }
+    public DbSet<CommentModel> CommentModel { get; set; }
+    public DbSet<FriendsModel> FriendsModel { get; set; }
+    public DbSet<QuestionModel> QuestionModel { get; set; }
+    public DbSet<ReactionModel> ReactionModel { get; set; }
+    public DbSet<UserModel> UserModel { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
